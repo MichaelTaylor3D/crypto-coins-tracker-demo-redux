@@ -1,5 +1,4 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import './App.css';
 
 import { connect } from 'react-redux';
 
@@ -30,7 +29,7 @@ const App = ({
 
     return (
       <Router>
-        <div className="App">
+        <>
           {globalProgress && <IndeterminateProgressOverlay />}
           <GlobalMsg 
             globalMsg={globalMsg} 
@@ -47,7 +46,7 @@ const App = ({
             </Route>
             {/* future routes to go here */}
           </Suspense>
-        </div>
+        </>
       </Router>
     );
 }
@@ -63,3 +62,4 @@ const mapDispatchToProps =  (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+export const AppComponent = App;
