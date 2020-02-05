@@ -1,13 +1,14 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import styled from 'styled-components';
 
 import AppBar from '../../lib/components/Appbar';
 
 import CurrencySelector from '../../lib/components/CurrencySelector';
 
-import ListingDrawer from './lib/ListingDrawer';
 import Listing from './lib/Listing';
+
+const ListingDrawer = lazy(() => import('./lib/ListingDrawer'));
 
 const CryptoTable = styled.table`
   width: 100%;
