@@ -2,7 +2,9 @@ import React from 'react';
 import { configure, shallow }  from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from "sinon";
+import ReactDOM from 'react-dom';
 import { expect } from 'chai';
+import { act } from 'react-dom/test-utils';
 
 import { AppComponent as App } from './App';
 import IndeterminateProgressOverlay from './lib/components/IndeterminateProgressOverlay';
@@ -12,6 +14,7 @@ configure({ adapter: new Adapter() });
 
 describe('App.js', () => {
   let props;
+  let useEffect;
 
   beforeEach(() => {
     // Default Props
@@ -24,6 +27,17 @@ describe('App.js', () => {
       setCurrencyAction: sinon.stub(),
       getAppFeedAction: sinon.stub()
     };
+  });
+
+  it('gets the feed on component mount', () => {
+    // We are getting app feed in the useEffect
+    const container = document.createElement('div');
+    
+    act(() => {
+      ReactDOM.render(<App {...props} />, container);
+    });
+    
+    expect(props.getAppFeedAction.called).to.be.true;
   });
 
   it('renders global progress overlay if the state is set to true', () => {
