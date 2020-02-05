@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import './App.css';
 
 import { connect } from 'react-redux';
@@ -8,12 +8,12 @@ import {
   Route,
 } from 'react-router-dom';
 
-import * as Pages from './pages';
-
 import IndeterminateProgressOverlay from './lib/components/IndeterminateProgressOverlay';
 import GlobalMsg from './lib/components/GlobalMsg';
 
 import * as actions from './actions';
+
+const Home = lazy(() => import('./pages/Home'))
 
 const App = ({ 
   globalProgress,
@@ -36,15 +36,17 @@ const App = ({
             globalMsg={globalMsg} 
             setGlobalMsg={setGlobalMsgAction}
           />
-          <Route exact path="/" >
-            <Pages.Home 
-              feed={feed} 
-              currencySelection={currencySelection} 
-              setCurrencyAction={setCurrencyAction}
-              getAppFeedAction={getAppFeedAction}
-            />
-          </Route>
-          {/* future routes to go here */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route exact path="/" >
+              <Home 
+                feed={feed} 
+                currencySelection={currencySelection} 
+                setCurrencyAction={setCurrencyAction}
+                getAppFeedAction={getAppFeedAction}
+              />
+            </Route>
+            {/* future routes to go here */}
+          </Suspense>
         </div>
       </Router>
     );
