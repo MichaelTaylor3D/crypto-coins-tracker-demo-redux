@@ -15,7 +15,7 @@ export default (state, action) => {
         case 'CURRENCY_SELECTION':
             return Object.assign({}, state, {
                 currencySelection: action.payload
-            })
+            });
         default:
             return state;
     }
