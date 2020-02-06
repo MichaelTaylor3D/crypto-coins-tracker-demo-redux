@@ -1,18 +1,18 @@
 export default (state, action) => {
     switch (action.type) {
-        case 'global-progress':
+        case 'GLOBAL_PROGRESS':
             return Object.assign({}, state, {
                 globalProgress: action.payload
             });
-        case 'global-message':
+        case 'GLOBAL_MESSAGE':
             return Object.assign({}, state, {
                 globalMessage: action.payload
             });
-        case 'feed':
+        case 'FEED':
             return Object.assign({}, state, {
                 feed: action.payload
             });
-        case 'currency-selection':
+        case 'CURRENCY_SELECTION':
             return Object.assign({}, state, {
                 currencySelection: action.payload
             })
